@@ -1,0 +1,121 @@
+<div class="container main-container">
+  <h4>Demo Cadastro</h4>
+  <hr />
+  <form novalidate (ngSubmit)="adicionarUsuario()" [formGroup]="cadastroForm">
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="nome">Nome Completo</label>
+        <div class="col-md-10">
+          <input
+            class="form-control"
+            id="nome"
+            type="text"
+            placeholder="Nome (Requrido)"
+            formControlName="nome"
+            [ngClass]="{
+              'is-invalid':
+                cadastroForm.get('nome')?.errors &&
+                (cadastroForm.get('nome')?.dirty ||
+                  cadastroForm.get('nome')?.touched)
+            }"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              cadastroForm.get('nome')?.errors &&
+              (cadastroForm.get('nome')?.dirty ||
+                cadastroForm.get('nome')?.touched)
+            "
+          >
+            <p>Preencha o campo nome</p>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="email">CPF</label>
+        <div class="col-md-10">
+          <input
+            class="form-control"
+            id="cpf"
+            type="text"
+            placeholder="CPF (requerido)"
+            formControlName="cpf"
+            cpf
+            [textMask]="{ mask: MASKS['cpf'].textMask }"
+          />
+          <span
+            class="text-danger"
+            *ngIf="cadastroForm.get('cpf')?.errors?.['cpf']
+            && cadastroForm.get('cpf')?.dirty 
+            || cadastroForm.get('cpf')?.touched"
+            >CPF Inválido
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="email">Email</label>
+        <div class="col-md-10">
+          <input
+            class="form-control"
+            id="email"
+            type="text"
+            placeholder="Email (Requrido)"
+            formControlName="email"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="senha">Senha</label>
+        <div class="col-md-10">
+          <input
+            class="form-control"
+            id="senha"
+            type="password"
+            placeholder="Senha (Requrido)"
+            formControlName="senha"
+          />
+          <span
+            class="text-danger"
+            *ngIf="cadastroForm.get('senha')?.errors?.['senha']
+            && cadastroForm.get('senha')?.dirty 
+            || cadastroForm.get('senha')?.touched"
+            >Senha deve ter entre 6 a 15 caracteres
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label" for="senhaConfirmacao"
+          >Confirme a Senha</label
+        >
+        <div class="col-md-10">
+          <input
+            class="form-control"
+            id="senhaConfirmacao"
+            type="password"
+            placeholder="Confirmar Senha (Requrido)"
+            formControlName="confirmacaoSenha"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-4 col-md-offset-2">
+          <span
+            ><button
+              class="btn btn-success"
+              id="Registrar"
+              [disabled]="!cadastroForm.valid"
+              type="submit"
+            >
+              Registrar
+            </button></span
+          >
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-4 col-md-offset-2">
+          <p>Formulario Valido: {{ cadastroForm.valid }}</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
